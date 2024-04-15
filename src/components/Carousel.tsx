@@ -9,7 +9,7 @@ export const Carousel = ({
                            className,
                            isImage
                          }: {
-  items: string[];
+  items: { name: string; desc: string }[] | string[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
@@ -87,18 +87,18 @@ export const Carousel = ({
           isImage ?
             <li
               className="max-w-full relative w-[250px]"
-              key={item}>
+              key={idx}>
               <img
                 className="rounded h-full object-cover"
-                src={item}
+                src={typeof item === 'string' ? item : ''}
                 alt="food"/>
             </li>
             :
             <li
               className="max-w-full relative w-[250px] bg-stone-50 p-3 rounded shadow"
-              key={item.name}>
+              key={typeof item !== "string" ? item?.name : ''}>
               <div className="flex flex-col gap-3">
-                <div className="font-bold tracking-wide">{item.name}</div>
+                <div className="font-bold tracking-wide">{typeof item !== "string" ? item.name : ''}</div>
                 <div className="flex h-5 gap-1">
                   <img src="/star.svg" className="h-full"/>
                   <img src="/star.svg" className="h-full"/>
@@ -106,7 +106,7 @@ export const Carousel = ({
                   <img src="/star.svg" className="h-full"/>
                   <img src="/star.svg" className="h-full"/>
                 </div>
-                <div className="text-sm">{item.desc}</div>
+                <div className="text-sm">{typeof item !== "string" ? item.desc : ''}</div>
               </div>
             </li>
         ))}

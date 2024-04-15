@@ -1,6 +1,6 @@
 "use client";
 import {cn} from "../../utils/cn";
-import React, {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {createNoise3D} from "simplex-noise";
 
 export const WavyBackground = ({
@@ -70,7 +70,7 @@ export const WavyBackground = ({
       ctx.lineWidth = waveWidth || 10;
       ctx.strokeStyle = waveColors[i % waveColors.length];
       for (x = 0; x < w; x += 5) {
-        let y = noise(x / 800, 0.3 * i, nt) * 150;
+        const y = noise(x / 800, 0.3 * i, nt) * 150;
         ctx.lineTo(x, y + h * 0.5); // adjust for height, currently at 50% of the container
       }
       ctx.stroke();
